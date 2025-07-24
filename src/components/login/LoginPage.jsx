@@ -133,9 +133,9 @@ const LoginPage = () => {
                         color="primary"
                         fullWidth
                         type="submit"
-                        sx={{ marginTop: 2 }}
+                        sx={{ marginTop: 2, textTransform:"none" }}
                     >
-                        Login
+                        Sign In
                     </Button>
                 </form>
             </Box>
