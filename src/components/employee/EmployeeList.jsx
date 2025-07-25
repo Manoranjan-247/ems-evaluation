@@ -246,10 +246,11 @@ const EmployeeList = () => {
 
 
 
-        <TableContainer sx={{ width: '100%', overflowX: 'auto' }} >
-          <Table>
+        <TableContainer sx={{ width: '100%', overflowX: 'auto', maxHeight:"83vh" }} >
+          
+          <Table stickyHeader>
             <TableHead>
-              <TableRow sx={{ bgcolor: "#e3f2fd", '& th': { color: "#0d47a1", borderBottom: "#1px solid #bbdefb" } }}>
+              <TableRow sx={{ bgcolor: "#e3f2fd", '& th': { color: "#0d47a1", borderBottom: "#1px solid #bbdefb" }, position:"sticky", top:0, zIndex:100 }}>
                 <TableCell align='center' sx={{ fontSize: { xs: '1rem', xl: '1.15rem' } }}><strong>Sl no</strong></TableCell>
                 <TableCell align='center' sx={{ fontSize: { xs: '1rem', xl: '1.15rem' } }}><strong>Fullname</strong></TableCell>
                 <TableCell align='center' sx={{ display: { xs: "none", sm: "none", lg: "table-cell" }, fontSize: { xs: '1rem', xl: '1.15rem' } }}><strong>Profile photo</strong></TableCell>
@@ -322,7 +323,7 @@ const EmployeeList = () => {
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
           rowsPerPageOptions={[10, 20, 30]}
-          sx={{ width: { xs: "100%" } }}
+          sx={{ width: { xs: "100%" },  }}
         />
 
 
