@@ -358,7 +358,7 @@ const AddEditEmployee = () => {
                   <TextField label="Date of Birth" type='date' fullWidth variant="outlined" InputLabelProps={{ shrink: true }} {...register("dateOfBirth")} error={!!errors.dateOfBirth} helperText={errors.dateOfBirth?.message} />
                 </Grid>
                 <Grid size={{ xs: 12, md: 12 }}>
-                  <TextField label="Skills (comma-separated)" placeholder="Javascript, Node.js, React etc" type='text' fullWidth variant='outlined'  {...register("skills")} error={!!errors.skills} helperText={errors.skills?.message} />
+                  <TextField label="Skills (comma with space separated)" placeholder="Javascript, Node.js, React etc" type='text' fullWidth variant='outlined'  {...register("skills")} error={!!errors.skills} helperText={errors.skills?.message} />
                 </Grid>
 
                 {/* Image Upload  */}
