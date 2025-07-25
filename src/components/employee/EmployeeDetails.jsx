@@ -22,7 +22,7 @@ const EmployeeDetails = () => {
 
     const { id } = useParams();
     const employee = useSelector((store) => store.employee.employees.find((emp) => emp.empId === id));
-    if (!employee) return (<Box sx={{ minHeight: "100%", color: "red", display: "flex", justifyContent: "center", alignItems: "center", fontSize: { xs: "1.8rem", md: "2.5rem" } }}>Employee With This ID Doesn't Exist</Box>)
+    if (!employee) return (<Box sx={{ minHeight: "100%", color: "red", display: "flex", justifyContent: "center", alignItems: "center", fontSize: { xs: "1.5rem", md: "2.5rem" }, p:2 }}>Employee With This ID Doesn't Exist</Box>)
 
 
 
