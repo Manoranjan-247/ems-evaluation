@@ -22,9 +22,9 @@ const EmployeeDetails = () => {
 
     const { id } = useParams();
     const employee = useSelector((store) => store.employee.employees.find((emp) => emp.empId === id));
-    if (!employee) return (<Box sx={{ minHeight: "100%", color: "red", display: "flex", justifyContent: "center", alignItems: "center", fontSize: {xs:"1.8rem", md:"2.5rem"} }}>Employee With This ID Doesn't Exist</Box>)
+    if (!employee) return (<Box sx={{ minHeight: "100%", color: "red", display: "flex", justifyContent: "center", alignItems: "center", fontSize: { xs: "1.8rem", md: "2.5rem" } }}>Employee With This ID Doesn't Exist</Box>)
 
-    
+
 
     const handleclick = () => {
         navigate("/employees")
@@ -64,8 +64,9 @@ const EmployeeDetails = () => {
                                     gap: 2,
                                     alignItems: "center",
                                     flexDirection: isSmallMobile ? "column" : "row",
-                                    '@media (min-width:491px) and (max-width:515px)':{
-                                        flexDirection:"column"
+                                    '@media (min-width:491px) and (max-width:515px)': {
+                                        flexDirection: "column",
+
                                     }
                                 }}>
                                     <Typography variant='h6' sx={{ fontSize: { xs: "1.3rem", md: "1.8rem", lg: "2rem" } }} fontWeight={600}>{employee.fullName}</Typography>
@@ -74,11 +75,18 @@ const EmployeeDetails = () => {
                                         {employee.isAdmin && <Chip label='Admin' variant='outlined' color='primary' />}
                                     </Box>
                                 </Box>
-                                <Box sx={{ display: "flex", flexDirection: isSmallMobile ? "column" : "row", gap: 1, justifyContent: isSmallMobile ? "center" : "flex-start", alignItems: isSmallMobile ? "center" : "flex-start" }}>
+                                {/* <Box sx={{ display: "flex", flexDirection: isSmallMobile ? "column" : "row", gap: 1, justifyContent: isSmallMobile ? "center" : "flex-start", alignItems: isSmallMobile ? "center" : "flex-start"  }}>
+                                    <Typography variant='h6' sx={{ opacity: 0.6 }}>{employee.designation}  </Typography>
+                                    <Typography variant='h6' sx={{ opacity: 0.6 }}>{!isSmallMobile && " • "}{employee.department}</Typography>
+
+                                </Box> */}
+
+                                <Box sx={{ display: "flex", flexDirection: isSmallMobile ? "column" : "row", gap: 1, justifyContent: {xs:"center", sm:"flex-start"}, alignItems: {xs:"center", sm:"flex-start"} }}>
                                     <Typography variant='h6' sx={{ opacity: 0.6 }}>{employee.designation}  </Typography>
                                     <Typography variant='h6' sx={{ opacity: 0.6 }}>{!isSmallMobile && " • "}{employee.department}</Typography>
 
                                 </Box>
+
                                 <Box sx={{ display: "flex", flexDirection: isSmallMobile ? "column" : "row" }}>
                                     <Button
                                         disableRipple
