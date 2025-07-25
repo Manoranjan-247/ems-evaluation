@@ -1,13 +1,6 @@
 // IDCard.js
 import React from 'react';
-import {
-    Card,
-    CardContent,
-    Avatar,
-    Typography,
-    Divider,
-    Box,
-} from '@mui/material';
+import {Card, CardContent, Avatar, Typography, Divider, Box,} from '@mui/material';
 
 const IDCard = React.forwardRef(({ emp }, ref) => {
     return (

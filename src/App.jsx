@@ -3,7 +3,7 @@ import './App.css'
 import LoginPage from "./components/login/LoginPage"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
-import { LayoutProvider } from './context/useLayoutContext'
+import { LayoutProvider } from './context/LayoutContext'
 import EmployeeList from './components/employee/EmployeeList'
 import ProtectedRoute from './routes/ProtectedRoute'
 import Layout from './components/commonComponents/Layout'
@@ -11,7 +11,6 @@ import { Provider } from 'react-redux'
 import store from './app/store'
 import AddEditEmployee from './components/employee/AddEditEmployee'
 import { lazy, Suspense } from 'react'
-import { ConfirmDialogProvider } from './context/ConfirmDialogContext'
 import Error from './components/commonComponents/Error'
 import Home from './pages/Home'
 import LoadingComponent from './components/commonComponents/LoadingComponent'
@@ -22,7 +21,6 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <ConfirmDialogProvider>
         <LayoutProvider>
           <AuthProvider>
             <BrowserRouter >
@@ -39,12 +37,10 @@ function App() {
                     </Suspense>} />
                 </Route>
                 <Route path='*' element={<Error />} />
-                {/* Protected Route */}
               </Routes>
             </BrowserRouter>
           </AuthProvider>
         </LayoutProvider>
-        </ConfirmDialogProvider>
       </Provider>
     </>
   )

@@ -7,13 +7,13 @@ const LoadingComponent = ({ text = 'Loading...' }) => {
     <Box
       display="flex"
       flexDirection="column"
-      
+
       alignItems="center"
       justifyContent="center"
-      sx={{height:"93vh"}}
+      sx={{ height: "93vh", bgcolor: "#fafafa" }}
       gap={3}
     >
-      <CircularProgress color="success" size="3rem" value={100} />
+      <CircularProgress color="primary" size="3rem" value={60} />
       <Typography variant="subtitle1" mt={2}>
         {text}
       </Typography>

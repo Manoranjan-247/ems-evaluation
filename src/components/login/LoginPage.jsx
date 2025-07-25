@@ -10,15 +10,7 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 
-const schema = yup.object().shape({
-    email: yup.string()
-        .required("Email is required")
-        .matches(
-            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-            "Invalid email format"
-        ),
-    password: yup.string().required("Password is required").min(8, "Password must be at least 8 characters"),
-});
+
 
 const LoginPage = () => {
     const { login } = useAuth();
@@ -28,19 +20,27 @@ const LoginPage = () => {
         setShowPassword((prevState) => !prevState);
     };
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        setError,
+    const schema = yup.object().shape({
+        email: yup.string()
+            .required("Email is required")
+            .matches(
+                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                "Invalid email format"
+            ),
+        password: yup.string().required("Password is required").min(8, "Password must be at least 8 characters"),
+    });
 
-    } = useForm({
-        defaultValues: ({
+    const form = useForm({
+        defaultValues: {
             email: "test@watsoo.com",
             password: "Test@123"
-        }),
-        resolver: yupResolver(schema),
+        },
+        resolver: yupResolver(schema)
     });
+
+    const { register, handleSubmit, setError, formState } = form;
+    const { errors } = formState;
+
 
     const onSubmit = (data) => {
         const result = login(data.email, data.password);
@@ -133,7 +133,7 @@ const LoginPage = () => {
                         color="primary"
                         fullWidth
                         type="submit"
-                        sx={{ marginTop: 2, textTransform:"none" }}
+                        sx={{ marginTop: 2, textTransform: "none" }}
                     >
                         Sign In
                     </Button>

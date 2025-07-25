@@ -66,8 +66,11 @@ const EmployeeDetails = () => {
                                     gap: 2,
                                     alignItems: "center",
                                     flexDirection: isSmallMobile ? "column" : "row",
+                                    '@media (min-width:491px) and (max-width:515px)':{
+                                        flexDirection:"column"
+                                    }
                                 }}>
-                                    <Typography variant='h6' sx={{ fontSize: { xs: "1.5rem", md: "1.8rem", lg: "2rem" } }} fontWeight={600}>{employee.fullName}</Typography>
+                                    <Typography variant='h6' sx={{ fontSize: { xs: "1.3rem", md: "1.8rem", lg: "2rem" } }} fontWeight={600}>{employee.fullName}</Typography>
                                     <Box sx={{ display: "flex", gap: 1 }}>
                                         <Chip label={employee.status} variant='filled' color={employee.status === "On Leave" ? 'error' : 'success'} />
                                         {employee.isAdmin && <Chip label='Admin' variant='outlined' color='primary' />}

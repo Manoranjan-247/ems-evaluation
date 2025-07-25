@@ -19,7 +19,6 @@ import * as XLSX from 'xlsx';
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined';
 import GppBadOutlinedIcon from '@mui/icons-material/GppBadOutlined';
 import { useMediaQuery, useTheme } from '@mui/material';
-// import { useConfirmDialog } from '../../context/ConfirmDialogContext';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 const EmployeeList = () => {
 
@@ -37,7 +36,7 @@ const EmployeeList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
 
-  const [page, setPage] = useState(0); // MUI TablePagination is 0-indexed
+  const [page, setPage] = useState(0); 
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
 
@@ -57,7 +56,7 @@ const EmployeeList = () => {
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // Reset to first page
+    setPage(0); 
   };
 
   const paginatedEmployees = filteredEmployees.slice(
@@ -87,7 +86,7 @@ const EmployeeList = () => {
       if (searchQuery.trim() !== '') {
         setPage(0);
       }
-    }, 500)
+    }, 200)
 
     return () => clearTimeout(timer);
   }, [searchQuery])

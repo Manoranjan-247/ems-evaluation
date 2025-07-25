@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import {addEmployee, updateEmployee } from '../../app/employeeSlice'
+import { addEmployee, updateEmployee } from '../../app/employeeSlice'
 import { useParams } from 'react-router-dom';
 import { useMediaQuery, useTheme } from '@mui/material';
 
@@ -39,8 +39,8 @@ const AddEditEmployee = () => {
     fullName: yup.string()
       .required("Full Name is required!")
       .matches(/^[A-Za-z ]+$/, "Only alphabets and spaces are allowed.")
-      .min(2, "Full Name must be at least 2 characters.")
-      .max(50, "Full Name must be at most 50 characters."),
+      .min(3, "Full Name must be at least 2 characters.")
+      .max(30, "Full Name must be at most 30 characters."),
     email: yup.string()
       .required("Email is required")
       .matches(
@@ -153,17 +153,16 @@ const AddEditEmployee = () => {
       fullName: yup.string()
         .required("Fullname is required")
         .matches(/^[A-Za-z ]+$/, "Only alphabets and spaces are allowed")
-        .min(2, "Name must be at least 2 characters")
-        .max(50, "Name must be at most 50 characters"),
+        .min(3, "Name must be at least 3 characters")
+        .max(30, "Name must be at most 30 characters"),
       relationship: yup.string()
         .required("Relationship is required")
-        .matches(/^[A-Za-z ]+$/, "Only alphabets and spaces are allowed"),
+        .matches(/^[A-Za-z ]+$/, "Only alphabets and spaces are allowed")
+        .min(2, "Name must be at least 2 characters")
+        .max(30, "Name must be at most 30 characters"),
       phoneNumber: yup.string()
         .required("Phone Number is required")
-        .matches(
-          /^\+?[0-9]{10,15}$/,
-          "Phone number must contain only digits and length should be 10-15 "
-        )
+        .matches(/^\+?[0-9]{10}$/, "Phone number must be 10 digits")
     })
 
 
@@ -267,7 +266,7 @@ const AddEditEmployee = () => {
         const base64String = reader.result;
         setImagePreview(base64String); // For preview
         setSelectedImage(base64String); // Optional: update selected image state
-        setValue('profilePicture', base64String, { shouldValidate: true, shouldDirty:true }); // Save to React Hook Form
+        setValue('profilePicture', base64String, { shouldValidate: true, shouldDirty: true }); // Save to React Hook Form
       };
 
       reader.readAsDataURL(file); // Converts to base64
@@ -318,10 +317,9 @@ const AddEditEmployee = () => {
   }
 
   return (
-    <Box  sx={{p:2, bgcolor:"#f5f9ff", minHeight:"93vh"}}>
+    <Box sx={{ p: 2, bgcolor: "#f5f9ff", minHeight: "93vh" }}>
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "column" }, gap: { xs: 1, md: 2 }, mb: { xs: 1, md: 3 }, pl: 2 }}>
         <Button
-          // fullWidth
           variant="text"
           disableRipple
           disableFocusRipple
@@ -336,7 +334,7 @@ const AddEditEmployee = () => {
           onClick={handleclick}
           startIcon={<KeyboardBackspaceIcon />}
         >
-          
+
         </Button>
         <Box>
           {!isSmallMobile && <Typography color='primary.main' variant='h4' fontWeight={600} sx={{ '@media(max-width:389px)': { display: "none" } }}>{isEditMode ? "Update employee" : "Add New Employee"}</Typography>}
@@ -349,10 +347,10 @@ const AddEditEmployee = () => {
       <form noValidate onSubmit={handleSubmit(handleFormSubmit)}>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={1}>
+            {/* personal information */}
             <Grid size={{ md: 4 }} sx={{ p: 2, boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px" }}>
-              <Typography  variant='h6' sx={{ fontSize: { xs: "1.5rem", '@media(min-width:900px) and (max-width:915px)': { fontSize: "1.4rem" }, lg: "2rem" } }} mb={2}>  Personal Information  </Typography>
+              <Typography variant='h6' sx={{ fontSize: { xs: "1.5rem", '@media(min-width:900px) and (max-width:915px)': { fontSize: "1.4rem" }, lg: "2rem" } }} mb={2}>  Personal Information  </Typography>
 
-              {/* Inner Grid Container */}
               <Grid container spacing={2}>
                 <Grid size={{ xs: 12, sm: 6, md: 12 }}>
                   <TextField label="Full Name" type='text' fullWidth variant="outlined" {...register("fullName")} error={!!errors.fullName} helperText={errors.fullName?.message} />
@@ -370,17 +368,10 @@ const AddEditEmployee = () => {
                   <TextField label="Skills (comma-separated)" placeholder="Javascript, Node.js, React etc" type='text' fullWidth variant='outlined'  {...register("skills")} error={!!errors.skills} helperText={errors.skills?.message} />
                 </Grid>
 
-                {/* Image Upload Section */}
+                {/* Image Upload  */}
                 <Grid size={{ md: 12 }}>
                   <Typography variant="h6" sx={{ fontSize: { xs: "1rem" } }} >Profile Picture</Typography>
                   <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 2 }}>
-                    {/* {imagePreview && (
-                      <Avatar
-                        src={imagePreview}
-                        sx={{ width: 100, height: 100 }}
-                        alt="Employee Preview"
-                      />
-                    )} */}
                     <Button
                       variant='outlined'
                       onClick={triggerFileInput}
@@ -397,8 +388,6 @@ const AddEditEmployee = () => {
                       onChange={handleImageUpload}
 
                     />
-
-                    {/* Register the file manually with RHF for validation */}
                     <input
                       type="hidden"
                       {...register('profilePicture')}
@@ -411,7 +400,6 @@ const AddEditEmployee = () => {
                     {imagePreview && (
                       <Avatar
                         src={imagePreview}
-                        // sx={{ width: 100, height: 100 }}
                         sx={{ '@media(max-width:400px)': { width: 50, height: 50 }, width: { xs: 100, md: 80, lg: 100 }, height: { xs: 100, md: 80, lg: 100 } }}
                         alt="Employee Preview"
                       />
@@ -427,7 +415,7 @@ const AddEditEmployee = () => {
 
               </Grid>
             </Grid>
-
+            {/* job information */}
             <Grid size={{ xs: 12, md: 8 }} sx={{ p: 2, boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px" }} spacing={2}>
               <Typography variant='h6' sx={{ fontSize: { xs: "1.5rem", lg: "2rem" } }} mb={2} >  Job Information  </Typography>
               <Grid container spacing={2}>
@@ -447,7 +435,6 @@ const AddEditEmployee = () => {
                   <TextField label="Employee Type" select fullWidth variant="outlined" value={watchedEmployeeType || ""}   {...register("employeeType")} error={!!errors.employeeType} helperText={errors.employeeType?.message}>
                     <MenuItem value="">Select Employee Type</MenuItem>
                     <MenuItem value="Full Time">Full Time</MenuItem>
-                    {/* <MenuItem value="Part Time">Part Time</MenuItem> */}
                     <MenuItem value="Intern">Intern</MenuItem>
                   </TextField>
                 </Grid>
@@ -458,7 +445,6 @@ const AddEditEmployee = () => {
                   <TextField label="Status" select fullWidth variant="outlined" value={watchedStatus || ""}   {...register("status")} error={!!errors.status} helperText={errors.status?.message}>
                     <MenuItem value="">Select Status</MenuItem>
                     <MenuItem value="Active">Active</MenuItem>
-                    {/* <MenuItem value="Inactive">Inactive</MenuItem> */}
                     <MenuItem value="On Leave">On Leave</MenuItem>
                   </TextField>
                 </Grid>
@@ -472,7 +458,7 @@ const AddEditEmployee = () => {
                         checked={isAdmin}
                         onChange={(e) => {
                           setIsAdmin(e.target.checked);
-                          setValue("isAdmin", e.target.checked, { shouldValidate: true, shouldDirty:true });
+                          setValue("isAdmin", e.target.checked, { shouldValidate: true, shouldDirty: true });
                         }}
                         color="primary"
                       />
@@ -488,7 +474,7 @@ const AddEditEmployee = () => {
                 </Grid>
               </Grid>
             </Grid>
-
+            {/* emergency contact */}
             <Grid size={{ md: 12 }} sx={{ p: 2, boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px" }}>
               <Typography variant='h6' sx={{ fontSize: { xs: "1.5rem", lg: "2rem" } }} mb={2}>  Emergency Contact  </Typography>
               <Grid container spacing={2} sx={{ mt: 1 }}>
@@ -505,7 +491,7 @@ const AddEditEmployee = () => {
               </Grid>
             </Grid>
 
-            {/* Submit Button */}
+            {/*  Buttons */}
             <Grid size={{ xs: 12, md: 12 }} sx={{ mt: 3 }}>
               <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end', flexWrap: "wrap" }}>
                 {!isEditMode && <Button disabled={!isDirty} type='button' variant="contained" onClick={() => { reset(); setImagePreview(null); setSelectedImage(null) }} sx={{
@@ -524,7 +510,7 @@ const AddEditEmployee = () => {
                 }}>
                   Cancel
                 </Button>
-                <Button disabled={(!isDirty && isEditMode) || (!isDirty && !isEditMode)}  variant="contained" color="success" type='submit' sx={{
+                <Button disabled={(!isDirty && isEditMode) || (!isDirty && !isEditMode)} variant="contained" color="success" type='submit' sx={{
                   px: { xs: 1, sm: 2 },
                   py: { xs: 0.5, sm: 1 },
                   fontSize: { xs: '0.7rem', sm: '0.875rem' },

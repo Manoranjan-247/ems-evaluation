@@ -11,20 +11,18 @@ export const AuthProvider = ({ children }) => {
 
   });
 
-  const [loading, setLoading] = useState(true); // 👈 add this
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
     const storedAuth = localStorage.getItem("auth");
 
     if (storedAuth) {
-
       setAuth(JSON.parse(storedAuth));
 
     }
 
-    setLoading(false); 
-
+    setLoading(false);
   }, []);
 
   const login = (email, password) => {
@@ -56,14 +54,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-<AuthContext.Provider value={{ auth, login, logout, loading }}>
-
+    <AuthContext.Provider value={{ auth, login, logout, loading }}>
       {children}
-</AuthContext.Provider>
+    </AuthContext.Provider>
 
   );
 
 };
 
 export const useAuth = () => useContext(AuthContext);
- 

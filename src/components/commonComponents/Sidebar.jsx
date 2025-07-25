@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography, Box } from '@mui/material';
-import { useLayoutContext } from '../../context/useLayoutContext';
+import { useLayoutContext } from '../../context/LayoutContext';
 import { useMediaQuery, useTheme } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 import HomeIcon from '@mui/icons-material/Home';
