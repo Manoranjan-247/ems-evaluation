@@ -79,9 +79,7 @@ const LoginPage = () => {
                     Login To EMS
                 </Typography>
 
-                {/* <Typography variant="body2" color="text.secondary" marginBottom={1} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    Sign in to your Employee Management System
-                </Typography> */}
+                
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <TextField

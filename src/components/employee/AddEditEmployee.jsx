@@ -8,15 +8,12 @@ import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEmployee, updateEmployee } from '../../app/employeeSlice'
 import { useParams } from 'react-router-dom';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 
 
 
 const AddEditEmployee = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));  //screen < 600px
   const isSmallMobile = useMediaQuery('(min-width:390px) and (max-width:490px)');
-
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +22,6 @@ const AddEditEmployee = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  //code for edit 
   const { id } = useParams();
   const isEditMode = Boolean(id);
   const employee = useSelector((store) => store.employee.employees.find((emp) => emp.empId === id));
@@ -201,7 +197,7 @@ const AddEditEmployee = () => {
   });
 
   const { register, handleSubmit, formState, setValue, reset, watch } = form;
-  const { errors, isDirty, isValid } = formState
+  const { errors, isDirty } = formState
 
 
 
@@ -236,14 +232,11 @@ const AddEditEmployee = () => {
     }
     if (isEditMode) {
       if (employee) {
-        // console.log(employee.status);
-        // console.log(employee.employeeType);
         const formValues = {
           ...employee,
           skills: Array.isArray(employee.skills) ? employee.skills.join(', ') : employee.skills,
 
         }
-        // console.log(formValues)
         reset(formValues);
         setImagePreview(employee.profilePicture);
         setSelectedImage(employee.profilePicture);

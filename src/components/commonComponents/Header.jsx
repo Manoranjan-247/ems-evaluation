@@ -34,7 +34,7 @@ const Header = () => {
                 <Typography variant='h5' color='primary.dark' fontWeight={600}>{isMobile ? "EMS" : "Employee Management System"}</Typography>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 4 }}>
-                {/* <Typography variant='h5'>Admin</Typography> */}
+                
                 <ProfileDropdown logout={logout}  />
             </Box >
 

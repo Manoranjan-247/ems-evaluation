@@ -14,19 +14,17 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 
 const EmployeeDetails = () => {
     const navigate = useNavigate();
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));  //screen < 600px
     const isSmallMobile = useMediaQuery('(min-width:375px) and (max-width:490px)');
 
     const { id } = useParams();
     const employee = useSelector((store) => store.employee.employees.find((emp) => emp.empId === id));
     if (!employee) return (<Box sx={{ minHeight: "100%", color: "red", display: "flex", justifyContent: "center", alignItems: "center", fontSize: {xs:"1.8rem", md:"2.5rem"} }}>Employee With This ID Doesn't Exist</Box>)
 
-    // console.log(employee);
+    
 
     const handleclick = () => {
         navigate("/employees")

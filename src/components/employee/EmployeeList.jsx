@@ -18,20 +18,18 @@ import * as XLSX from 'xlsx';
 // import { saveAs } from 'file-saver';
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined';
 import GppBadOutlinedIcon from '@mui/icons-material/GppBadOutlined';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 const EmployeeList = () => {
 
-  // const theme = useTheme();
-  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));  
+   
   const isSmallMobile = useMediaQuery('(min-width:375px) and (max-width:500px)');
 
 
   const employees = useSelector((store) => store.employee.employees)
-  // console.log("Employee data: ", employees);
+  
   const navigate = useNavigate();
-  // ok - cancel dialog
-  // const confirmDialog = useConfirmDialog();
+  
 
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
@@ -174,7 +172,7 @@ const EmployeeList = () => {
     return <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: 2, mt: 3 }}>
       <Typography variant='h6' >No employees found</Typography>
       <Typography variant='body1' mt={1} sx={{ opacity: 0.6, p: 2 }}>  Overview of your employee management system </Typography>
-      <Button variant='contained' onClick={handleClick}>Add First Employee</Button>
+      <Button variant='contained' sx={{textTransform:"none"}} onClick={handleClick}>Add First Employee</Button>
     </Box>
   }
   return (
@@ -227,13 +225,7 @@ const EmployeeList = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             sx={{ width: { xs: '80%', sm: 300 }, pr: { md: 4, lg: 0 }, borderRadius: 2, }}
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">
-            //       <SearchIcon fontSize="small" color="action" />
-            //     </InputAdornment>
-            //   )
-            // }}
+            
 
             slotProps={{
               input: {
