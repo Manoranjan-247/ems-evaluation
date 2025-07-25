@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Chip, InputAdornment, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Button, Chip, IconButton, InputAdornment, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
@@ -15,16 +15,16 @@ import IDCard from './IDCard';
 import { createRoot } from 'react-dom/client';
 import TablePagination from '@mui/material/TablePagination';
 import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
+// import { saveAs } from 'file-saver';
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined';
 import GppBadOutlinedIcon from '@mui/icons-material/GppBadOutlined';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { useConfirmDialog } from '../../context/ConfirmDialogContext';
+// import { useConfirmDialog } from '../../context/ConfirmDialogContext';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 const EmployeeList = () => {
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));  //screen < 600px
+  // const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm'));  
   const isSmallMobile = useMediaQuery('(min-width:375px) and (max-width:500px)');
 
 
@@ -32,7 +32,7 @@ const EmployeeList = () => {
   // console.log("Employee data: ", employees);
   const navigate = useNavigate();
   // ok - cancel dialog
-  const confirmDialog = useConfirmDialog();
+  // const confirmDialog = useConfirmDialog();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
@@ -71,9 +71,9 @@ const EmployeeList = () => {
     navigate(`/employee-edit/${empId}`);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const savedPage = sessionStorage.getItem("EmployeeListPage");
-    if(savedPage !== null && employees.length > 0){
+    if (savedPage !== null && employees.length > 0) {
       setPage(parseInt(savedPage, 10));
 
       sessionStorage.removeItem("EmployeeListPage");
@@ -81,15 +81,15 @@ const EmployeeList = () => {
   }, [employees.length]);
 
   useEffect(() => {
-    
+
     const timer = setTimeout(() => {
       setDebouncedQuery(searchQuery);
-      if(searchQuery.trim() !== ''){
-      setPage(0);
+      if (searchQuery.trim() !== '') {
+        setPage(0);
       }
     }, 500)
 
-      return ()=> clearTimeout(timer);
+    return () => clearTimeout(timer);
   }, [searchQuery])
 
 
@@ -98,7 +98,7 @@ const EmployeeList = () => {
     navigate('/employees/new')
   }
 
- 
+
 
   const generatePDF = async (emp) => {
     const container = document.createElement('div');
@@ -110,11 +110,11 @@ const EmployeeList = () => {
     root.render(<IDCard emp={emp} />)
 
     setTimeout(async () => {
-      const canvas = await html2canvas(container.firstChild, {scale: 3});
+      const canvas = await html2canvas(container.firstChild, { scale: 3 });
       const imgData = canvas.toDataURL('image/png');
 
-      const imgWidth = 300 ;
-      const imgHeight = 270 ;
+      const imgWidth = 300;
+      const imgHeight = 270;
 
       const pdf = new jsPDF({
         orientation: 'landscape',
@@ -228,13 +228,28 @@ const EmployeeList = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             sx={{ width: { xs: '80%', sm: 300 }, pr: { md: 4, lg: 0 }, borderRadius: 2, }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon fontSize="small" color="action" />
-                </InputAdornment>
-              )
-            }}
+            // InputProps={{
+            //   startAdornment: (
+            //     <InputAdornment position="start">
+            //       <SearchIcon fontSize="small" color="action" />
+            //     </InputAdornment>
+            //   )
+            // }}
+
+            slotProps={{
+              input: {
+                  endAdornment: (
+                      <InputAdornment position="start">
+                          <IconButton
+                              aria-label="search-icon"
+                              
+                          >
+                              <SearchIcon fontSize="small" color="action" />
+                          </IconButton>
+                      </InputAdornment>
+                  ),
+              },
+          }}
           />
         </Stack>
 
@@ -252,7 +267,6 @@ const EmployeeList = () => {
                 <TableCell align='center' sx={{ display: { xs: "none", sm: "none", md: "table-cell" }, fontSize: { xs: '1rem', xl: '1.15rem' } }}><strong>Designation</strong></TableCell>
                 <TableCell align='center' sx={{ display: { xs: "none", sm: "none", lg: "table-cell" }, fontSize: { xs: '1rem', xl: '1.15rem' } }}><strong>Department</strong></TableCell>
                 <TableCell align='center' sx={{ display: { xs: "none", sm: "table-cell" }, '@media (min-width:600px) and (max-width:655px)': { display: "none" }, fontSize: { xs: '1rem', xl: '1.15rem' } }}><strong>Status</strong></TableCell>
-                {/* <TableCell align='center' sx={{ display: { xs: "none", sm: "none", md: "table-cell" }, fontSize: { xs: '1rem', xl: '1.15rem' } }}><strong>isAdmin</strong></TableCell> */}
                 <TableCell align='center' sx={{ display: { xs: "none", sm: "none", md: "none" }, '@media(min-width: 961px)': { display: "table-cell" }, fontSize: { xs: '1rem', xl: '1.15rem' } }}><strong>isAdmin</strong></TableCell>
                 <TableCell align='center' sx={{ fontSize: { xs: '1rem', xl: '1.15rem' } }}><strong>Actions</strong></TableCell>
               </TableRow>
@@ -263,7 +277,6 @@ const EmployeeList = () => {
                   <TableRow key={emp.empId} hover sx={{ '&hover': { bgcolor: '#fof7ff', transition: '0.3s' } }}>
                     <TableCell align='center'>{page * rowsPerPage + idx + 1}</TableCell>
                     <TableCell align='center'>{emp.fullName}</TableCell>
-
 
                     <TableCell align="center" sx={{ display: { xs: "none", sm: "none", lg: "table-cell", fontSize: { xs: '1rem', md: '1.5rem' } } }}>
                       <Box display="flex" justifyContent="center">

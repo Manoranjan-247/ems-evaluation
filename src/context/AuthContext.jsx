@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
     }
 
-    setLoading(false); // ✅ mark as loaded
+    setLoading(false); 
 
   }, []);
 

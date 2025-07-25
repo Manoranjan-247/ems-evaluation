@@ -288,13 +288,6 @@ const AddEditEmployee = () => {
       dispatch(addEmployee(formatedData));
     }
 
-    // if(!isDirty && isEditMode) {
-    //   setTimeout(()=>{
-    //     navigate('/employees')
-    //   }, 500)
-
-    //   return;
-    // }
     setSnackbarOpen(true);
     setSnackbarMessage(isEditMode ? "Employee updated successfully" : "Employee added successfully")
     setTimeout(() => {

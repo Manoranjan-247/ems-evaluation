@@ -23,14 +23,14 @@ const IDCard = React.forwardRef(({ emp }, ref) => {
                 alignItems: 'center',
                 fontFamily: 'Arial',
                 bgcolor: "#ffffc5",
-                color:"black"
+                color: "black"
             }}
         >
             <CardContent sx={{ padding: '8px !important', width: '100%' }}>
                 <Box display="flex" flexDirection="column" alignItems="center"  >
                     <Avatar
                         src={emp.profilePicture}
-                        sx={{ width: 80, height: 80, marginBottom: 0.5,  borderRadius:"50%", border:"3px solid #f58c21" }}
+                        sx={{ width: 80, height: 80, marginBottom: 0.5, borderRadius: "50%", border: "3px solid #f58c21" }}
                     />
                     <Typography color='primary' variant="h6" fontWeight="bold">
                         {emp.fullName}
@@ -40,23 +40,23 @@ const IDCard = React.forwardRef(({ emp }, ref) => {
 
                 <Divider sx={{ my: 1 }} />
 
-                <Box sx={{display:"flex", gap:2, alignItems:"flex-start", pl:"1.5rem"}}>
+                <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start", pl: "1.5rem" }}>
                     <Box>
-                    <Typography variant="body2" >
-                        ID No
-                    </Typography>
-                    <Typography variant="body2">
-                        Dept.
-                    </Typography>
-                    <Typography variant="body2">
-                        Deg.
-                    </Typography>
-                    <Typography variant="body2">
-                        Phone
-                    </Typography>
-                    <Typography variant="body2">
-                        Email
-                    </Typography>
+                        <Typography variant="body2" >
+                            ID No
+                        </Typography>
+                        <Typography variant="body2">
+                            Dept.
+                        </Typography>
+                        <Typography variant="body2">
+                            Deg.
+                        </Typography>
+                        <Typography variant="body2">
+                            Phone
+                        </Typography>
+                        <Typography variant="body2">
+                            Email
+                        </Typography>
                     </Box>
                     <Box>
                         <Typography variant="body2">: {emp.empId}</Typography>
@@ -65,7 +65,7 @@ const IDCard = React.forwardRef(({ emp }, ref) => {
                         <Typography variant="body2">: {emp.phoneNumber}</Typography>
                         <Typography variant="body2">: {emp.email}</Typography>
                     </Box>
-                    
+
                 </Box>
             </CardContent>
         </Card>
